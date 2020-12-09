@@ -32,5 +32,29 @@ pipeline {
                 }
             }
         }
+        stage('SonarSCan') {
+            when {
+                branch 'feature-*'
+            }
+            steps {
+                echo "Sonar for feature branch"
+            }    
+        }
+        stage('DeploytoDev') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                echo "Deploy to Dev"
+            }    
+        }
+        stage('DeploytoProd') {
+            when {
+                branch 'master'
+            }
+            steps {
+                echo "Deploy to Prod"
+            }    
+        }
     }
 }
