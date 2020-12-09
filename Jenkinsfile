@@ -1,6 +1,10 @@
+#!/usr/bin/env groovy
 pipeline {
     agent {
         label 'node1'
+    }
+    options {
+        timestamps()
     }
     tools {
         maven 'M3'
@@ -38,7 +42,7 @@ pipeline {
             }
             steps {
                 echo "Sonar for feature branch"
-            }    
+            }
         }
         stage('DeploytoDev') {
             when {
@@ -46,7 +50,7 @@ pipeline {
             }
             steps {
                 echo "Deploy to Dev"
-            }    
+            }
         }
         stage('DeploytoProd') {
             when {
@@ -54,7 +58,24 @@ pipeline {
             }
             steps {
                 echo "Deploy to Prod"
-            }    
+            }
+        }
+    }
+    post {
+        always {
+            mail to: 'manasjit.mohanty@gmail.com',
+                subject: "Always condition: ${currentBuild.fullDisplayName}",
+                body: "Always ${env.BUILD_URL}"
+        }
+        failure {
+            mail to: 'manasjit.mohanty@gmail.com',
+                subject: "Failed condition: ${currentBuild.fullDisplayName}",
+                body: "Failed ${env.BUILD_URL}"
+        }
+        success {
+            mail to: 'manasjit.mohanty@gmail.com',
+                subject: "Success condition: ${currentBuild.fullDisplayName}",
+                body: "Success ${env.BUILD_URL}"
         }
     }
 }
