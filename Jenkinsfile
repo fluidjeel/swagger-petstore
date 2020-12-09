@@ -18,5 +18,22 @@ pipeline {
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
+        stage('Testing') {
+            parallel {
+                stage('UnitTest'){
+                    steps {
+                        echo "Unit Test is completed"
+                    }
+                }
+                stage('IntTest') {
+                    steps {
+                        echo "Int test is done"
+                    }
+                }
+            }
+            
+                
+            }
+        }
     }
 }
