@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 pipeline {
     agent {
-        label 'node1'
+        label 'master'
     }
     options {
         timestamps()
