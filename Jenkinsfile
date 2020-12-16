@@ -63,19 +63,13 @@ pipeline {
     }
     post {
         always {
-            mail to: 'manasjit.mohanty@gmail.com',
-                subject: "Always condition: ${currentBuild.fullDisplayName}",
-                body: "Always ${env.BUILD_URL}"
+            echo "Build completed"
         }
         failure {
-            mail to: 'manasjit.mohanty@gmail.com',
-                subject: "Failed condition: ${currentBuild.fullDisplayName}",
-                body: "Failed ${env.BUILD_URL}"
+            echo "Build failed"
         }
         success {
-            mail to: 'manasjit.mohanty@gmail.com',
-                subject: "Success condition: ${currentBuild.fullDisplayName}",
-                body: "Success ${env.BUILD_URL}"
+            echo "Build passed"
         }
     }
 }
