@@ -1,4 +1,4 @@
-# Swagger Petstore 
+# Swagger Petstore Doc
 
 ## Overview
 This is the pet store sample hosted at https://petstore3.swagger.io. For other versions, check the branches.
